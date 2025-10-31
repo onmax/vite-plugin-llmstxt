@@ -1,26 +1,41 @@
-import { x } from 'tinyexec'
 import { describe, expect, it } from 'vitest'
-import { getPackageExportsManifest } from 'vitest-package-exports'
-import yaml from 'yaml'
+import * as exports from '../src/index'
 
-// TODO: remove this when you are ready for the first release
-const IS_READY = false
+describe('package exports', () => {
+  it('exports main plugin', () => {
+    expect(exports.llmsPlugin).toBeDefined()
+    expect(typeof exports.llmsPlugin).toBe('function')
+  })
 
-describe.runIf(IS_READY)('exports-snapshot', async () => {
-  const packages: { name: string, path: string, private?: boolean }[] = JSON.parse(
-    await x('pnpm', ['ls', '--only-projects', '-r', '--json']).then(r => r.stdout),
-  )
+  it('exports presets', () => {
+    expect(exports.createTutorialKitPreset).toBeDefined()
+    expect(exports.createVitePressPreset).toBeDefined()
+  })
 
-  for (const pkg of packages) {
-    if (pkg.private)
-      continue
-    it(`${pkg.name}`, async () => {
-      const manifest = await getPackageExportsManifest({
-        importMode: 'src',
-        cwd: pkg.path,
-      })
-      await expect(yaml.stringify(manifest.exports))
-        .toMatchFileSnapshot(`./exports/${pkg.name}.yaml`)
-    })
-  }
+  it('exports scanners', () => {
+    expect(exports.TutorialKitScanner).toBeDefined()
+    expect(exports.VitePressScanner).toBeDefined()
+  })
+
+  it('exports processors', () => {
+    expect(exports.ContentTagsProcessor).toBeDefined()
+    expect(exports.FrontmatterProcessor).toBeDefined()
+    expect(exports.HintsProcessor).toBeDefined()
+    expect(exports.ImageUrlsProcessor).toBeDefined()
+    expect(exports.MdreamProcessor).toBeDefined()
+    expect(exports.SnippetsProcessor).toBeDefined()
+  })
+
+  it('exports formatters', () => {
+    expect(exports.TutorialFormatter).toBeDefined()
+    expect(exports.DocsFormatter).toBeDefined()
+  })
+
+  it('exports core utilities', () => {
+    expect(exports.ProcessorPipeline).toBeDefined()
+    expect(exports.expandTemplate).toBeDefined()
+    expect(exports.DEFAULT_TEMPLATE).toBeDefined()
+    expect(exports.shouldIgnoreFile).toBeDefined()
+    expect(exports.getDirectoriesAtDepths).toBeDefined()
+  })
 })

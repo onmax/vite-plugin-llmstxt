@@ -1,0 +1,15 @@
+{
+  "name": "playground-vitepress",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "dependencies": {
+    "vite-plugin-llmstxt": "workspace:*",
+    "vitepress": "^1.0.0"
+  }
+}
