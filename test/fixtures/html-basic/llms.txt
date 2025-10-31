@@ -1,0 +1,8 @@
+# HTML Playground
+
+Testing vite-html-llms plugin
+
+## Pages
+
+- about.html
+- index.html

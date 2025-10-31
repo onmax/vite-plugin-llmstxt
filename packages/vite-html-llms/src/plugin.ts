@@ -33,7 +33,7 @@ export function htmlLlms(options: MdreamWrapperOptions = {}): Plugin[] {
       config = resolvedConfig
     },
 
-    async buildEnd() {
+    async closeBundle() {
       if (config.command !== 'build')
         return
 
@@ -82,7 +82,7 @@ async function collectHtmlFiles(dir: string, baseDir: string, filter: NonNullabl
 
     for (const entry of entries) {
       const fullPath = join(currentDir, entry.name)
-      const relativePath = fullPath.replace(`${baseDir}/`, '')
+      const relativePath = fullPath.replace(`${dir}/`, '')
 
       if (entry.isDirectory()) {
         await walk(fullPath)

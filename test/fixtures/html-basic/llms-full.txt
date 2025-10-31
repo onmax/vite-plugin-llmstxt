@@ -1,0 +1,33 @@
+# HTML Playground
+
+Testing vite-html-llms plugin
+
+## about.html
+
+About
+
+# About This Plugin
+
+The vite-html-llms plugin converts HTML pages to LLM-friendly markdown format.
+
+## How It Works
+
+1. Scans your built HTML files
+2. Converts them to markdown
+3. Generates llms.txt and llms-full.txt
+
+========================================
+
+## index.html
+
+HTML Playground
+
+# Welcome to HTML Playground
+
+This is a test page for vite-html-llms.
+
+## Features
+
+- Automatic HTML to Markdown conversion
+- LLM-optimized content generation
+- Easy integration with Vite

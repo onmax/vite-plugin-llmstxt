@@ -300,6 +300,16 @@ importers:
         specifier: catalog:dev
         version: 3.2.4(@types/debug@4.1.12)(@types/node@24.9.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1)
 
+  playground/html-basic:
+    dependencies:
+      vite-html-llms:
+        specifier: workspace:*
+        version: link:../../packages/vite-html-llms
+    devDependencies:
+      vite:
+        specifier: catalog:dev
+        version: 7.1.12(@types/node@24.9.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1)
+
   playground/tutorialkit-basic:
     dependencies:
       '@astrojs/vue':
