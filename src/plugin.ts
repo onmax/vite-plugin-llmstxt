@@ -1,15 +1,13 @@
+import type { PreparedFile } from '@vite-plugin-llmstxt/core'
 import type { Plugin, ViteDevServer } from 'vite'
-import type { PreparedFile } from './core/formatter'
 import type { LLMPluginOptions, Preset, ProcessorConfig } from './types'
 import { existsSync } from 'node:fs'
 import { mkdir, writeFile } from 'node:fs/promises'
+import { getDirectoriesAtDepths, ProcessorPipeline, shouldIgnoreFile } from '@vite-plugin-llmstxt/core'
+import { createTutorialKitPreset } from '@vite-plugin-llmstxt/tutorialkit'
+import { createVitePressPreset } from '@vite-plugin-llmstxt/vitepress'
 import { consola } from 'consola'
 import { join } from 'pathe'
-import { getDirectoriesAtDepths } from './core/depth'
-import { shouldIgnoreFile } from './core/filter'
-import { ProcessorPipeline } from './core/processor'
-import { createTutorialKitPreset } from './presets/tutorialkit'
-import { createVitePressPreset } from './presets/vitepress'
 
 function resolvePreset(preset: LLMPluginOptions['preset'], contentDir: string): Preset {
   if (!preset || preset === 'auto') {

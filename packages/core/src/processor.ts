@@ -1,4 +1,14 @@
-import type { ProcessContext, Processor } from '../types'
+export interface ProcessContext {
+  filePath: string
+  contentDir: string
+  metadata?: Record<string, any>
+  [key: string]: any
+}
+
+export interface Processor {
+  name: string
+  process: (content: string, ctx: ProcessContext) => Promise<string>
+}
 
 export class ProcessorPipeline {
   private processors: Processor[] = []
@@ -14,5 +24,9 @@ export class ProcessorPipeline {
       result = await processor.process(result, ctx)
     }
     return result
+  }
+
+  getProcessors(): Processor[] {
+    return [...this.processors]
   }
 }

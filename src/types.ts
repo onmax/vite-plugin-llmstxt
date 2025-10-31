@@ -1,7 +1,5 @@
+import type { Formatter, Processor, Scanner } from '@vite-plugin-llmstxt/core'
 import type { Plugin } from 'vite'
-import type { Formatter } from './core/formatter'
-import type { Processor } from './core/processor'
-import type { Scanner } from './core/scanner'
 
 // Legacy types (for backward compat during migration)
 export interface Lesson {

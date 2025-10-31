@@ -1,5 +1,5 @@
+import * as exports from '@vite-plugin-llmstxt/index'
 import { describe, expect, it } from 'vitest'
-import * as exports from '../src/index'
 
 describe('package exports', () => {
   it('exports main plugin', () => {

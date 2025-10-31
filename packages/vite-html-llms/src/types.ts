@@ -1,13 +1,5 @@
+import type { Formatter, Processor } from '@vite-plugin-llmstxt/core'
 import type { Plugin } from 'vite'
-
-export interface ProcessContext {
-  filePath: string
-  relativePath: string
-}
-
-export interface Processor {
-  process: (content: string, ctx: ProcessContext) => Promise<string> | string
-}
 
 export interface PreparedFile {
   path: string
@@ -17,11 +9,6 @@ export interface PreparedFile {
 export interface FormatOptions {
   title?: string
   description?: string
-}
-
-export interface Formatter {
-  formatIndex: (files: PreparedFile[], opts: FormatOptions) => string
-  formatFull: (files: PreparedFile[], opts: FormatOptions) => string
 }
 
 export interface FilterOptions {
@@ -35,7 +22,6 @@ export interface FilterOptions {
 }
 
 export interface MdreamWrapperOptions {
-  publicDir?: string
   outputDir?: string
   indexFile?: string
   fullFile?: string

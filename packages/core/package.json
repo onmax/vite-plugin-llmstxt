@@ -1,19 +1,17 @@
 {
-  "name": "vite-html-llms",
+  "name": "@vite-plugin-llmstxt/core",
   "type": "module",
   "version": "0.1.0",
-  "description": "Vite plugin wrapper around @mdream/vite with composable LLM features",
+  "description": "Core utilities for LLM content generation",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
     }
   },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": ["dist"],
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
@@ -21,13 +19,10 @@
     "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
-  "peerDependencies": {
-    "vite": "^5.0.0 || ^6.0.0"
-  },
   "dependencies": {
-    "@mdream/vite": "catalog:",
-    "@vite-plugin-llmstxt/core": "workspace:*",
     "consola": "catalog:",
+    "gray-matter": "catalog:",
+    "mdream": "catalog:",
     "minimatch": "catalog:",
     "pathe": "catalog:"
   },
@@ -35,10 +30,8 @@
     "@antfu/eslint-config": "catalog:dev",
     "@types/node": "catalog:dev",
     "eslint": "catalog:dev",
-    "eslint-plugin-format": "catalog:dev",
-    "tsup": "catalog:dev",
+    "tsdown": "catalog:dev",
     "typescript": "catalog:dev",
-    "vite": "catalog:dev",
     "vitest": "catalog:dev"
   }
 }

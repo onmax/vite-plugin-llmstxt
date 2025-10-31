@@ -84,21 +84,15 @@ importers:
 
   .:
     dependencies:
-      consola:
-        specifier: 'catalog:'
-        version: 3.4.2
-      gray-matter:
-        specifier: 'catalog:'
-        version: 4.0.3
-      mdream:
-        specifier: 'catalog:'
-        version: 0.13.3
-      minimatch:
-        specifier: 'catalog:'
-        version: 10.1.1
-      pathe:
-        specifier: 'catalog:'
-        version: 1.1.2
+      '@vite-plugin-llmstxt/core':
+        specifier: workspace:*
+        version: link:packages/core
+      '@vite-plugin-llmstxt/tutorialkit':
+        specifier: workspace:*
+        version: link:packages/tutorialkit
+      '@vite-plugin-llmstxt/vitepress':
+        specifier: workspace:*
+        version: link:packages/vitepress
     devDependencies:
       '@antfu/eslint-config':
         specifier: catalog:dev
@@ -149,11 +143,8 @@ importers:
         specifier: catalog:dev
         version: 2.8.1
 
-  packages/vite-html-llms:
+  packages/core:
     dependencies:
-      '@mdream/vite':
-        specifier: 'catalog:'
-        version: 0.13.3(vite@7.1.12(@types/node@24.9.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1))
       consola:
         specifier: 'catalog:'
         version: 3.4.2
@@ -179,12 +170,111 @@ importers:
       eslint:
         specifier: catalog:dev
         version: 9.38.0(jiti@2.6.0)
+      tsdown:
+        specifier: catalog:dev
+        version: 0.15.12(typescript@5.9.3)
+      typescript:
+        specifier: catalog:dev
+        version: 5.9.3
+      vitest:
+        specifier: catalog:dev
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@24.9.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1)
+
+  packages/tutorialkit:
+    dependencies:
+      '@vite-plugin-llmstxt/core':
+        specifier: workspace:*
+        version: link:../core
+      pathe:
+        specifier: 'catalog:'
+        version: 1.1.2
+    devDependencies:
+      '@antfu/eslint-config':
+        specifier: catalog:dev
+        version: 5.4.1(@vue/compiler-sfc@3.5.22)(eslint-plugin-format@1.0.2(eslint@9.38.0(jiti@2.6.0)))(eslint@9.38.0(jiti@2.6.0))(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.9.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1))
+      '@types/node':
+        specifier: catalog:dev
+        version: 24.9.2
+      eslint:
+        specifier: catalog:dev
+        version: 9.38.0(jiti@2.6.0)
+      tsdown:
+        specifier: catalog:dev
+        version: 0.15.12(typescript@5.9.3)
+      typescript:
+        specifier: catalog:dev
+        version: 5.9.3
+      vite:
+        specifier: catalog:dev
+        version: 7.1.12(@types/node@24.9.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1)
+      vitest:
+        specifier: catalog:dev
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@24.9.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1)
+
+  packages/vite-html-llms:
+    dependencies:
+      '@mdream/vite':
+        specifier: 'catalog:'
+        version: 0.13.3(vite@7.1.12(@types/node@24.9.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1))
+      '@vite-plugin-llmstxt/core':
+        specifier: workspace:*
+        version: link:../core
+      consola:
+        specifier: 'catalog:'
+        version: 3.4.2
+      minimatch:
+        specifier: 'catalog:'
+        version: 10.1.1
+      pathe:
+        specifier: 'catalog:'
+        version: 1.1.2
+    devDependencies:
+      '@antfu/eslint-config':
+        specifier: catalog:dev
+        version: 5.4.1(@vue/compiler-sfc@3.5.22)(eslint-plugin-format@1.0.2(eslint@9.38.0(jiti@2.6.0)))(eslint@9.38.0(jiti@2.6.0))(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.9.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1))
+      '@types/node':
+        specifier: catalog:dev
+        version: 24.9.2
+      eslint:
+        specifier: catalog:dev
+        version: 9.38.0(jiti@2.6.0)
       eslint-plugin-format:
         specifier: catalog:dev
         version: 1.0.2(eslint@9.38.0(jiti@2.6.0))
       tsup:
         specifier: catalog:dev
         version: 8.5.0(jiti@2.6.0)(postcss@8.5.6)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
+      typescript:
+        specifier: catalog:dev
+        version: 5.9.3
+      vite:
+        specifier: catalog:dev
+        version: 7.1.12(@types/node@24.9.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1)
+      vitest:
+        specifier: catalog:dev
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@24.9.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1)
+
+  packages/vitepress:
+    dependencies:
+      '@vite-plugin-llmstxt/core':
+        specifier: workspace:*
+        version: link:../core
+      pathe:
+        specifier: 'catalog:'
+        version: 1.1.2
+    devDependencies:
+      '@antfu/eslint-config':
+        specifier: catalog:dev
+        version: 5.4.1(@vue/compiler-sfc@3.5.22)(eslint-plugin-format@1.0.2(eslint@9.38.0(jiti@2.6.0)))(eslint@9.38.0(jiti@2.6.0))(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.9.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1))
+      '@types/node':
+        specifier: catalog:dev
+        version: 24.9.2
+      eslint:
+        specifier: catalog:dev
+        version: 9.38.0(jiti@2.6.0)
+      tsdown:
+        specifier: catalog:dev
+        version: 0.15.12(typescript@5.9.3)
       typescript:
         specifier: catalog:dev
         version: 5.9.3

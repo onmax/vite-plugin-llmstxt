@@ -1,8 +1,8 @@
+import { DocsFormatter } from '@vite-plugin-llmstxt/formatters/docs'
+import { llmsPlugin } from '@vite-plugin-llmstxt/plugin'
+import { MdreamProcessor } from '@vite-plugin-llmstxt/processors/mdream'
+import { VitePressScanner } from '@vite-plugin-llmstxt/scanners/vitepress'
 import { describe, expect, it } from 'vitest'
-import { DocsFormatter } from '../src/formatters/docs'
-import { llmsPlugin } from '../src/plugin'
-import { MdreamProcessor } from '../src/processors/mdream'
-import { VitePressScanner } from '../src/scanners/vitepress'
 
 describe('llmsPlugin', () => {
   it('returns vite plugin with correct name', () => {

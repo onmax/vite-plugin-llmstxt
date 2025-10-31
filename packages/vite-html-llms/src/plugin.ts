@@ -2,14 +2,11 @@ import type { Plugin, ResolvedConfig } from 'vite'
 import type { MdreamWrapperOptions, PreparedFile } from './types'
 import { readdir, readFile, writeFile } from 'node:fs/promises'
 import mdream from '@mdream/vite'
+import { ContentTagsProcessor, FrontmatterProcessor, MdreamProcessor, ProcessorPipeline } from '@vite-plugin-llmstxt/core'
 import { consola } from 'consola'
 import { join } from 'pathe'
 import { shouldExcludeFile } from './core/filter'
-import { ProcessorPipeline } from './core/processor'
 import { HtmlFormatter } from './formatters/html'
-import { ContentTagsProcessor } from './processors/content-tags'
-import { FrontmatterProcessor } from './processors/frontmatter'
-import { MdreamProcessor } from './processors/mdream'
 
 const logger = consola.withTag('vite-html-llms')
 

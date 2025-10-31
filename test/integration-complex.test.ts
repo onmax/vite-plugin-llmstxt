@@ -1,13 +1,13 @@
 import { mkdtemp, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
+import { ProcessorPipeline } from '@vite-plugin-llmstxt/core/processor'
+import { TutorialFormatter } from '@vite-plugin-llmstxt/formatters/tutorial'
+import { ContentTagsProcessor } from '@vite-plugin-llmstxt/processors/content-tags'
+import { FrontmatterProcessor } from '@vite-plugin-llmstxt/processors/frontmatter'
+import { SnippetsProcessor } from '@vite-plugin-llmstxt/processors/snippets'
+import { TutorialKitScanner } from '@vite-plugin-llmstxt/scanners/tutorialkit'
 import { join, resolve } from 'pathe'
 import { afterEach, describe, expect, it } from 'vitest'
-import { ProcessorPipeline } from '../src/core/processor'
-import { TutorialFormatter } from '../src/formatters/tutorial'
-import { ContentTagsProcessor } from '../src/processors/content-tags'
-import { FrontmatterProcessor } from '../src/processors/frontmatter'
-import { SnippetsProcessor } from '../src/processors/snippets'
-import { TutorialKitScanner } from '../src/scanners/tutorialkit'
 
 describe('integration: complex tutorial', () => {
   let tempDir: string
