@@ -1,42 +1,79 @@
-# pkg-placeholder
+# vite-plugin-llmstxt
 
-[![npm version][npm-version-src]][npm-version-href]
-[![npm downloads][npm-downloads-src]][npm-downloads-href]
-[![bundle][bundle-src]][bundle-href]
-[![JSDocs][jsdocs-src]][jsdocs-href]
-[![License][license-src]][license-href]
+Vite plugin to generate llms.txt files from tutorial content.
 
-_description_
+## Installation
 
-## Note for Developers
+```bash
+npm install vite-plugin-llmstxt
+```
 
-This starter recommands using [npm Trusted Publisher](https://github.com/e18e/ecosystem-issues/issues/201), where the release is done on CI to ensure the security of the packages.
+## Usage
 
-To do so, you need to run `pnpm publish` manually for the very first time to create the package on npm, and then go to `https://www.npmjs.com/package/<your-package-name>/access` to set the connection to your GitHub repo.
+### Basic (TutorialKit)
 
-Then for the future releases, you can run `pnpm run release` to do the release and the GitHub Actions will take care of the release process.
+```typescript
+// astro.config.ts
+import { defineConfig } from 'astro/config'
+import { llmsPlugin } from 'vite-plugin-llmstxt'
 
-## Sponsors
+export default defineConfig({
+  vite: {
+    plugins: [llmsPlugin()]
+  }
+})
+```
 
-<p align="center">
-  <a href="https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg">
-    <img src='https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg'/>
-  </a>
-</p>
+### Custom Options
+
+```typescript
+llmsPlugin({
+  contentDir: 'src/content/tutorial', // default
+  outputDir: 'public', // default
+  adapter: new TutorialKitAdapter() // default
+})
+```
+
+### Custom Adapter
+
+```typescript
+import type { Adapter } from 'vite-plugin-llmstxt'
+import { llmsPlugin } from 'vite-plugin-llmstxt'
+
+class MyAdapter implements Adapter {
+  async scanTutorials(contentDir: string) {
+    // Your content discovery logic
+    return []
+  }
+
+  watchPatterns() {
+    return ['**/*.md']
+  }
+}
+
+llmsPlugin({ adapter: new MyAdapter() })
+```
+
+## Generated Files
+
+- `public/llms.txt` - Index with links
+- `public/llms-full.txt` - All tutorials concatenated
+- `public/tutorial/{slug}.txt` - Individual tutorial files
+
+## Development
+
+```bash
+pnpm install
+pnpm build
+pnpm test
+```
+
+### Playground
+
+```bash
+pnpm -F playground dev
+```
 
 ## License
 
-[MIT](./LICENSE) License © [Anthony Fu](https://github.com/antfu)
-
-<!-- Badges -->
-
-[npm-version-src]: https://img.shields.io/npm/v/pkg-placeholder?style=flat&colorA=080f12&colorB=1fa669
-[npm-version-href]: https://npmjs.com/package/pkg-placeholder
-[npm-downloads-src]: https://img.shields.io/npm/dm/pkg-placeholder?style=flat&colorA=080f12&colorB=1fa669
-[npm-downloads-href]: https://npmjs.com/package/pkg-placeholder
-[bundle-src]: https://img.shields.io/bundlephobia/minzip/pkg-placeholder?style=flat&colorA=080f12&colorB=1fa669&label=minzip
-[bundle-href]: https://bundlephobia.com/result?p=pkg-placeholder
-[license-src]: https://img.shields.io/github/license/antfu/pkg-placeholder.svg?style=flat&colorA=080f12&colorB=1fa669
-[license-href]: https://github.com/antfu/pkg-placeholder/blob/main/LICENSE
-[jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-080f12?style=flat&colorA=080f12&colorB=1fa669
-[jsdocs-href]: https://www.jsdocs.io/package/pkg-placeholder
+MIT
