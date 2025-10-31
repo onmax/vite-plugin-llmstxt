@@ -5,6 +5,97 @@
 
 <div style="display: none;" hidden="true" aria-hidden="true">Are you an LLM? You can read better optimized documentation at /api/reference.txt for this page in Markdown format</div>
 
+# API Reference
+
+Complete API documentation for vite-plugin-llmstxt.
+
+## Plugin Options
+
+### preset
+
+- Type: `'tutorialkit' | 'vitepress' | 'auto' | Preset`
+- Default: `'auto'`
+
+The preset to use for content scanning and formatting.
+
+### contentDir
+
+- Type: `string`
+- Default: `'src/content/tutorial'` (tutorialkit) or `'docs'` (vitepress)
+
+Directory containing source content.
+
+### outputDir
+
+- Type: `string`  
+- Default: `'public'` (tutorialkit) or `'dist'` (vitepress)
+
+Output directory for generated files.
+
+### stripHTML
+
+- Type: `boolean`
+- Default: `false` (tutorialkit) or `true` (vitepress)
+
+Strip HTML tags using mdream.
+
+### domain
+
+- Type: `string`
+- Default: `undefined`
+
+Domain prefix for absolute URLs in output.
+
+### handleContentTags
+
+- Type: `boolean`
+- Default: `true`
+
+Handle `<llm-only>` and `<llm-exclude>` tags.
+
+### template
+
+- Type: `string`
+- Default: Preset-specific template
+
+Custom template for llms.txt with variable substitution.
+
+### experimental
+
+- Type: `{ depth?: number }`
+- Default: `{ depth: 1 }`
+
+Experimental features like nested llms.txt generation.
+
+## Custom Components
+
+### Scanner
+
+```typescript
+interface Scanner {
+  scan(contentDir: string): Promise<RawFile[]>
+  watchPatterns(): string[]
+}
+```
+
+### Processor
+
+```typescript
+interface Processor {
+  name: string
+  process(content: string, ctx: ProcessContext): Promise<string>
+}
+```
+
+### Formatter
+
+```typescript
+interface Formatter {
+  formatIndex(files: PreparedFile[], opts: FormatOptions): string
+  formatFull(files: PreparedFile[], opts: FormatOptions): string
+  formatIndividual(file: PreparedFile, opts: FormatOptions): string
+}
+```
 
 
 
@@ -15,6 +106,54 @@
 
 <div style="display: none;" hidden="true" aria-hidden="true">Are you an LLM? You can read better optimized documentation at /guide/getting-started.txt for this page in Markdown format</div>
 
+# Getting Started
+
+Let's get started with vite-plugin-llmstxt!
+
+## Installation
+
+```bash
+pnpm add vite-plugin-llmstxt mdream
+```
+
+## Basic Usage
+
+Add the plugin to your Vite config:
+
+```typescript
+import { llmsPlugin } from 'vite-plugin-llmstxt'
+
+export default defineConfig({
+  vite: {
+    plugins: [llmsPlugin()]
+  }
+})
+```
+
+## Configuration
+
+Customize the plugin behavior:
+
+```typescript
+llmsPlugin({
+  preset: 'vitepress',
+  stripHTML: true,
+  domain: 'https://example.com',
+  handleContentTags: true,
+})
+```
+
+## Output Files
+
+The plugin generates:
+
+- `dist/llms.txt` - Index with links
+- `dist/llms-full.txt` - All content concatenated  
+- `dist/*.md` - Individual page files
+
+## Advanced Features
+
+See the [API Reference](/api/reference) for more details.
 
 
 
@@ -25,6 +164,30 @@
 
 <div style="display: none;" hidden="true" aria-hidden="true">Are you an LLM? You can read better optimized documentation at /guide/introduction.txt for this page in Markdown format</div>
 
+# Introduction
+
+Welcome to the VitePress playground for testing vite-plugin-llmstxt!
+
+## What is this?
+
+This is a simple VitePress documentation site used to test the plugin's ability to:
+
+- Generate `llms.txt` index files
+- Generate `llms-full.txt` with all content
+- Generate individual `.md` files for each page
+- Handle content tags like `` and `
+
+### HTML Stripping
+
+The plugin uses mdream to strip HTML and convert it to clean Markdown:
+
+<div class="custom-block tip">
+  <p>This HTML block will be converted to clean Markdown in the LLM output.</p>
+</div>
+
+## Next Steps
+
+Continue to [Getting Started](/guide/getting-started) to learn more.
 
 
 
@@ -36,4 +199,14 @@
 > Testing vite-plugin-llmstxt with VitePress
 
 <div style="display: none;" hidden="true" aria-hidden="true">Are you an LLM? View /llms.txt for optimized Markdown documentation, or /llms-full.txt for full documentation bundle</div>
+
+
+## Welcome
+
+This is a test VitePress site for the vite-plugin-llmstxt plugin.
+
+
+This content is only visible in the generated llms.txt files.
+
+
 

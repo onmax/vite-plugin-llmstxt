@@ -1,5 +1,5 @@
 import type { Preset } from './types'
-import { ContentTagsProcessor, DocsFormatter, FrontmatterProcessor, HintsProcessor, MdreamProcessor } from '@vite-plugin-llmstxt/core'
+import { ContentTagsProcessor, DocsFormatter, FrontmatterProcessor, HintsProcessor } from '@vite-plugin-llmstxt/core'
 import { VitePressScanner } from './scanner'
 
 export function createVitePressPreset(): Preset {
@@ -8,7 +8,6 @@ export function createVitePressPreset(): Preset {
     processors: [
       new FrontmatterProcessor({ extract: true }),
       new ContentTagsProcessor({ handleLLMOnly: true, handleLLMExclude: true }),
-      new MdreamProcessor({ stripHTML: true, useMinimalPreset: true }),
       new HintsProcessor({ injectLLMHint: true }),
     ],
     formatter: new DocsFormatter(),
@@ -27,7 +26,7 @@ export function createVitePressPreset(): Preset {
       generateIndex: true,
       generateFull: true,
       generateIndividual: true,
-      stripHTML: true,
+      stripHTML: false,
       injectLLMHint: true,
       handleContentTags: true,
       excludeUnnecessaryFiles: true,

@@ -14,13 +14,13 @@ export class ContentTagsProcessor implements Processor {
     let result = content
 
     if (this.options.handleLLMOnly) {
-      // Strip content between <llm-only> and </llm-only> (remove content)
-      result = result.replace(/<llm-only>([\s\S]*?)<\/llm-only>/g, '')
+      // Remove <llm-only> tags but keep the content
+      result = result.replace(/<llm-only>([\s\S]*?)<\/llm-only>/g, '$1')
     }
 
     if (this.options.handleLLMExclude) {
-      // Remove <llm-exclude> tags but keep the content
-      result = result.replace(/<llm-exclude>([\s\S]*?)<\/llm-exclude>/g, '$1')
+      // Strip content between <llm-exclude> and </llm-exclude> (remove content)
+      result = result.replace(/<llm-exclude>([\s\S]*?)<\/llm-exclude>/g, '')
     }
 
     return result

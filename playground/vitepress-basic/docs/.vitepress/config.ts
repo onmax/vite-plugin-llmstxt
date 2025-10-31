@@ -10,10 +10,7 @@ export default defineConfig({
       llmsPlugin({
         preset: 'vitepress',
         contentDir: 'docs',
-        stripHTML: true,
         domain: 'https://example.com',
-        handleContentTags: true,
-        injectLLMHint: true,
       }),
     ],
   },
