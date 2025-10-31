@@ -1,12 +1,18 @@
 {
   "name": "vite-plugin-llmstxt",
   "type": "module",
-  "version": "0.1.0",
-  "packageManager": "pnpm@10.17.1",
+  "version": "0.0.1",
+  "packageManager": "pnpm@10.20.0",
   "description": "Vite plugin to generate llms.txt files from tutorial content",
   "author": "Your Name",
   "license": "MIT",
-  "keywords": ["vite", "plugin", "llms", "tutorialkit", "llms.txt"],
+  "keywords": [
+    "vite",
+    "plugin",
+    "llms",
+    "tutorialkit",
+    "llms.txt"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {
