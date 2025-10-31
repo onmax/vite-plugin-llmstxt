@@ -1,4 +1,6 @@
 // src/generator.ts
+import { mkdir, writeFile } from 'node:fs/promises'
+import { join } from 'node:path'
 import type { Adapter, Tutorial } from './types'
 
 export class LLMGenerator {
@@ -67,5 +69,31 @@ export class LLMGenerator {
     })
 
     return parts.join('\n')
+  }
+
+  async generateAll(contentDir: string, outputDir: string): Promise<void> {
+    if (!this.adapter) {
+      throw new Error('Adapter is required for generateAll')
+    }
+
+    const tutorials = await this.adapter.scanTutorials(contentDir)
+
+    // Create output directories
+    await mkdir(join(outputDir, 'tutorial'), { recursive: true })
+
+    // Generate individual tutorial files
+    for (const tutorial of tutorials) {
+      const content = this.generateTutorialFile(tutorial)
+      const filePath = join(outputDir, 'tutorial', `${tutorial.slug}.txt`)
+      await writeFile(filePath, content, 'utf-8')
+    }
+
+    // Generate root index
+    const rootIndex = this.generateRootIndex(tutorials)
+    await writeFile(join(outputDir, 'llms.txt'), rootIndex, 'utf-8')
+
+    // Generate full file
+    const fullFile = this.generateFullFile(tutorials)
+    await writeFile(join(outputDir, 'llms-full.txt'), fullFile, 'utf-8')
   }
 }
