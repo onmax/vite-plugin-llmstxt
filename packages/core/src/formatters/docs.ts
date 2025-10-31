@@ -97,18 +97,15 @@ export class DocsFormatter implements Formatter {
       url = url.replace(/\.md$/, opts.linksExtension)
     }
 
+    // Handle base path first
+    const base = opts.base && opts.base !== '/' ? opts.base.replace(/\/$/, '') : ''
+
     // Add domain if provided
     if (opts.domain) {
-      url = `${opts.domain}/${url}`
+      url = `${opts.domain}${base}/${url}`
     }
     else {
-      url = `/${url}`
-    }
-
-    // Handle base path
-    if (opts.base && opts.base !== '/') {
-      const base = opts.base.replace(/\/$/, '')
-      url = url.replace(/^\//, `${base}/`)
+      url = `${base}/${url}`
     }
 
     return url
