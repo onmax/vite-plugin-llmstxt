@@ -1,0 +1,45 @@
+{
+  "name": "vite-html-llms",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Vite plugin wrapper around @mdream/vite with composable LLM features",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint .",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "vite": "^5.0.0 || ^6.0.0"
+  },
+  "dependencies": {
+    "@mdream/vite": "catalog:",
+    "consola": "catalog:",
+    "gray-matter": "catalog:",
+    "mdream": "catalog:",
+    "minimatch": "catalog:",
+    "pathe": "catalog:"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:dev",
+    "@types/node": "catalog:dev",
+    "eslint": "catalog:dev",
+    "eslint-plugin-format": "catalog:dev",
+    "tsup": "catalog:dev",
+    "typescript": "catalog:dev",
+    "vite": "catalog:dev",
+    "vitest": "catalog:dev"
+  }
+}
