@@ -32,4 +32,29 @@ describe('LLMGenerator', () => {
     expect(result).toContain('#### index.js')
     expect(result).toContain('```js\nconsole.log("hello")\n```')
   })
+
+  it('generates root index with tutorial links', () => {
+    const tutorials: Tutorial[] = [
+      {
+        slug: 'intro',
+        title: 'Introduction',
+        description: 'Getting started',
+        lessons: [],
+      },
+      {
+        slug: 'basics',
+        title: 'Basics',
+        description: 'Core concepts',
+        lessons: [],
+      },
+    ]
+
+    const generator = new LLMGenerator()
+    const result = generator.generateRootIndex(tutorials)
+
+    expect(result).toContain('# Tutorials')
+    expect(result).toContain('[Introduction](/tutorial/intro.txt)')
+    expect(result).toContain('[Basics](/tutorial/basics.txt)')
+    expect(result).toContain('[All Tutorials](/llms-full.txt)')
+  })
 })

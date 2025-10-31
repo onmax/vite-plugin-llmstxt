@@ -36,4 +36,22 @@ export class LLMGenerator {
 
     return parts.join('\n')
   }
+
+  generateRootIndex(tutorials: Tutorial[]): string {
+    const parts: string[] = []
+
+    parts.push('# Tutorials\n')
+    parts.push('Learn through interactive tutorials.\n')
+    parts.push('## Available Tutorials\n')
+
+    tutorials.forEach((tutorial) => {
+      const desc = tutorial.description || tutorial.title
+      parts.push(`- [${tutorial.title}](/tutorial/${tutorial.slug}.txt): ${desc}`)
+    })
+
+    parts.push('\n## Complete Documentation\n')
+    parts.push('- [All Tutorials](/llms-full.txt): Full combined documentation')
+
+    return parts.join('\n')
+  }
 }
