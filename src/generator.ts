@@ -54,4 +54,18 @@ export class LLMGenerator {
 
     return parts.join('\n')
   }
+
+  generateFullFile(tutorials: Tutorial[]): string {
+    const parts: string[] = []
+
+    tutorials.forEach((tutorial, idx) => {
+      parts.push(this.generateTutorialFile(tutorial))
+
+      if (idx < tutorials.length - 1) {
+        parts.push('\n========================================\n')
+      }
+    })
+
+    return parts.join('\n')
+  }
 }

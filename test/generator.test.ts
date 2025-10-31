@@ -57,4 +57,38 @@ describe('LLMGenerator', () => {
     expect(result).toContain('[Basics](/tutorial/basics.txt)')
     expect(result).toContain('[All Tutorials](/llms-full.txt)')
   })
+
+  it('generates full file with all tutorials concatenated', () => {
+    const tutorials: Tutorial[] = [
+      {
+        slug: 'intro',
+        title: 'Introduction',
+        lessons: [{
+          slug: 'welcome',
+          title: 'Welcome',
+          content: 'Intro content',
+          solutionFiles: new Map(),
+        }],
+      },
+      {
+        slug: 'basics',
+        title: 'Basics',
+        lessons: [{
+          slug: 'start',
+          title: 'Start',
+          content: 'Basics content',
+          solutionFiles: new Map(),
+        }],
+      },
+    ]
+
+    const generator = new LLMGenerator()
+    const result = generator.generateFullFile(tutorials)
+
+    expect(result).toContain('# Introduction')
+    expect(result).toContain('Intro content')
+    expect(result).toContain('# Basics')
+    expect(result).toContain('Basics content')
+    expect(result).toContain('========================================')
+  })
 })
