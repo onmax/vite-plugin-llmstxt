@@ -6,7 +6,7 @@ import { VitePressScanner } from '../src/scanners/vitepress'
 
 describe('llmsPlugin', () => {
   it('returns vite plugin with correct name', () => {
-    const plugin = llmsPlugin()
+    const plugin = llmsPlugin({ preset: 'tutorialkit' })
 
     expect(plugin.name).toBe('vite-plugin-llmstxt')
     expect(plugin.buildStart).toBeDefined()
@@ -15,6 +15,7 @@ describe('llmsPlugin', () => {
 
   it('accepts basic options', () => {
     const plugin = llmsPlugin({
+      preset: 'tutorialkit',
       contentDir: 'custom/content',
       outputDir: 'custom/output',
     })
@@ -32,6 +33,7 @@ describe('llmsPlugin', () => {
 
   it('accepts custom scanner', () => {
     const plugin = llmsPlugin({
+      preset: 'tutorialkit',
       scanner: new VitePressScanner(),
     })
 
@@ -40,6 +42,7 @@ describe('llmsPlugin', () => {
 
   it('accepts custom processors', () => {
     const plugin = llmsPlugin({
+      preset: 'tutorialkit',
       processors: [new MdreamProcessor({ stripHTML: true })],
     })
 
@@ -48,6 +51,7 @@ describe('llmsPlugin', () => {
 
   it('accepts custom formatter', () => {
     const plugin = llmsPlugin({
+      preset: 'tutorialkit',
       formatter: new DocsFormatter(),
     })
 
@@ -56,6 +60,7 @@ describe('llmsPlugin', () => {
 
   it('accepts template options', () => {
     const plugin = llmsPlugin({
+      preset: 'tutorialkit',
       template: '# {title}\n\n{toc}',
       templateVars: { title: 'Custom' },
     })
@@ -65,6 +70,7 @@ describe('llmsPlugin', () => {
 
   it('accepts filtering options', () => {
     const plugin = llmsPlugin({
+      preset: 'tutorialkit',
       ignoreFiles: ['**/draft/**'],
       excludeBlog: true,
       excludeTeam: true,
@@ -75,6 +81,7 @@ describe('llmsPlugin', () => {
 
   it('accepts experimental options', () => {
     const plugin = llmsPlugin({
+      preset: 'tutorialkit',
       experimental: {
         depth: 2,
       },

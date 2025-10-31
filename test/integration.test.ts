@@ -1,5 +1,5 @@
-import { mkdtemp, readFile, rm } from 'node:fs/promises'
-import { tmpdir } from 'node:os'
+import { mkdtemp, readFile, rm } from 'fs/promises'
+import { tmpdir } from 'os'
 import { join, resolve } from 'pathe'
 import { afterEach, describe, expect, it } from 'vitest'
 import { ProcessorPipeline } from '../src/core/processor'

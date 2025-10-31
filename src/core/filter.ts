@@ -27,22 +27,16 @@ export function shouldIgnoreFile(filePath: string, workDir: string, filter: File
   }
 
   // Check predefined exclusions
-  if (filter.excludeUnnecessaryFiles || filter.excludeIndexPage) {
-    if (filter.excludeIndexPage && UNNECESSARY_PATTERNS.indexPage.some(p => minimatch(relativePath, p))) {
-      return true
-    }
+  if (filter.excludeIndexPage && UNNECESSARY_PATTERNS.indexPage.some(p => minimatch(relativePath, p))) {
+    return true
   }
 
-  if (filter.excludeUnnecessaryFiles || filter.excludeBlog) {
-    if (filter.excludeBlog && UNNECESSARY_PATTERNS.blog.some(p => minimatch(relativePath, p))) {
-      return true
-    }
+  if ((filter.excludeUnnecessaryFiles || filter.excludeBlog) && UNNECESSARY_PATTERNS.blog.some(p => minimatch(relativePath, p))) {
+    return true
   }
 
-  if (filter.excludeUnnecessaryFiles || filter.excludeTeam) {
-    if (filter.excludeTeam && UNNECESSARY_PATTERNS.team.some(p => minimatch(relativePath, p))) {
-      return true
-    }
+  if ((filter.excludeUnnecessaryFiles || filter.excludeTeam) && UNNECESSARY_PATTERNS.team.some(p => minimatch(relativePath, p))) {
+    return true
   }
 
   return false

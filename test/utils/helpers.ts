@@ -1,5 +1,5 @@
-import { mkdtemp, rm, writeFile } from 'node:fs/promises'
-import { tmpdir } from 'node:os'
+import { mkdtemp, rm, writeFile } from 'fs/promises'
+import { tmpdir } from 'os'
 import { join } from 'pathe'
 
 export interface TestContext {

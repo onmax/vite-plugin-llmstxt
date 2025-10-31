@@ -1,5 +1,5 @@
 import type { ProcessContext, Processor } from '../core/processor'
-import { readFile } from 'node:fs/promises'
+import { readFile } from 'fs/promises'
 import { join } from 'pathe'
 
 export interface SnippetsProcessorOptions {

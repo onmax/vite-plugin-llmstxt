@@ -1,5 +1,5 @@
 import type { Preset, Tutorial } from './types'
-import { mkdir, writeFile } from 'node:fs/promises'
+import { mkdir, writeFile } from 'fs/promises'
 import { join } from 'pathe'
 
 export class LLMGenerator {

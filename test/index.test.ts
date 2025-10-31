@@ -7,7 +7,7 @@ describe('main exports', () => {
   })
 
   it('creates valid Vite plugin', () => {
-    const plugin = llmsPlugin()
+    const plugin = llmsPlugin({ preset: 'tutorialkit' })
     
     expect(plugin).toBeDefined()
     expect(plugin.name).toBe('vite-plugin-llmstxt')

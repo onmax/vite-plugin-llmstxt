@@ -1,5 +1,5 @@
 import type { RawFile, Scanner } from '../core/scanner'
-import { readdir, readFile } from 'node:fs/promises'
+import { readdir, readFile } from 'fs/promises'
 import { join } from 'pathe'
 
 export class TutorialKitScanner implements Scanner {

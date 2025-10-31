@@ -45,8 +45,8 @@
   "dependencies": {
     "consola": "^3.4.2",
     "gray-matter": "^4.0.3",
-    "mdream": "^1.0.0",
-    "minimatch": "^10.0.1",
+    "mdream": "^0.13.3",
+    "minimatch": "^10.1.1",
     "pathe": "^1.1.2"
   },
   "devDependencies": {
