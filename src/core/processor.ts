@@ -7,7 +7,7 @@ export interface ProcessContext {
 
 export interface Processor {
   name: string
-  process(content: string, ctx: ProcessContext): Promise<string>
+  process: (content: string, ctx: ProcessContext) => Promise<string>
 }
 
 export class ProcessorPipeline {

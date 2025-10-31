@@ -73,29 +73,29 @@ llmsPlugin({ preset: 'tutorialkit' }) // or 'vitepress' or 'auto'
 Override any piece:
 
 ```typescript
-import { llmsPlugin, MdreamProcessor, DocsFormatter } from 'vite-plugin-llmstxt'
+import { DocsFormatter, llmsPlugin, MdreamProcessor } from 'vite-plugin-llmstxt'
 
 llmsPlugin({
   preset: 'tutorialkit',
-  
+
   // Append custom processors
   processors: [
     new MdreamProcessor({ stripHTML: true }),
   ],
-  
+
   // Replace formatter
   formatter: new DocsFormatter(),
-  
+
   // Template customization
   template: '# {title}\n\n{toc}',
   templateVars: { customVar: 'value' },
-  
+
   // Output control
   domain: 'https://example.com',
   generateIndex: true,
   generateFull: true,
   generateIndividual: true,
-  
+
   // Filtering
   ignoreFiles: ['**/draft/**'],
   excludeBlog: true,
@@ -111,42 +111,42 @@ llmsPlugin({
 interface LLMPluginOptions {
   // Preset (provides defaults)
   preset?: 'tutorialkit' | 'vitepress' | 'auto' | Preset
-  
+
   // Override components
   scanner?: Scanner
   processors?: Processor[] | { mode: 'replace' | 'append', list: Processor[] }
   formatter?: Formatter
-  
+
   // Content discovery
   contentDir?: string
   outputDir?: string
   workDir?: string
-  
+
   // Filtering
   ignoreFiles?: string[]
   excludeUnnecessaryFiles?: boolean
   excludeIndexPage?: boolean
   excludeBlog?: boolean
   excludeTeam?: boolean
-  
+
   // Processing
   stripHTML?: boolean
   injectLLMHint?: boolean
   handleContentTags?: boolean
-  
+
   // Output
   domain?: string
   generateIndex?: boolean
   generateFull?: boolean
   generateIndividual?: boolean
-  
+
   // Template
   template?: string
   templateVars?: Record<string, string>
   title?: string
   description?: string
   details?: string
-  
+
   // Advanced
   experimental?: {
     depth?: number // nested llms.txt generation
@@ -165,7 +165,7 @@ class MyScanner implements Scanner {
     // Your content discovery logic
     return []
   }
-  
+
   watchPatterns(): string[] {
     return ['**/*.md']
   }
@@ -189,7 +189,7 @@ import { MdreamProcessor } from 'vite-plugin-llmstxt'
 // Custom processor
 class MyProcessor implements Processor {
   name = 'my-processor'
-  
+
   async process(content: string, ctx: ProcessContext): Promise<string> {
     // Transform content
     return content.toUpperCase()
@@ -200,18 +200,18 @@ class MyProcessor implements Processor {
 ### Formatters
 
 ```typescript
-import { TutorialFormatter, DocsFormatter } from 'vite-plugin-llmstxt'
+import { DocsFormatter, TutorialFormatter } from 'vite-plugin-llmstxt'
 
 // Custom formatter
 class MyFormatter implements Formatter {
   formatIndex(files: PreparedFile[], opts: FormatOptions): string {
     return files.map(f => `- ${f.title}`).join('\n')
   }
-  
+
   formatFull(files: PreparedFile[], opts: FormatOptions): string {
     return files.map(f => f.content).join('\n---\n')
   }
-  
+
   formatIndividual(file: PreparedFile, opts: FormatOptions): string {
     return `# ${file.title}\n\n${file.content}`
   }

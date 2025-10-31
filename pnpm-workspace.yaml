@@ -1,15 +1,12 @@
 packages:
-  - playground
-  - docs
-  - packages/*
-  - examples/*
-
-ignoreWorkspaceRootCheck: true
-shellEmulator: true
+  - playground/*
 
 catalogs:
   default:
-    consola: ^3.2.3
+    consola: ^3.4.2
+    gray-matter: ^4.0.3
+    mdream: ^0.13.3
+    minimatch: ^10.1.1
     pathe: ^1.1.2
   dev:
     '@antfu/eslint-config': ^5.4.1
@@ -28,11 +25,7 @@ catalogs:
     vitest: ^3.2.4
     vitest-package-exports: ^0.1.1
     yaml: ^2.8.1
-  playground:
-    '@astrojs/vue': ^0.0.0
-    '@tutorialkit/astro': ^0.0.0
-    astro: ^0.0.0
-    vue: ^0.0.0
+
 onlyBuiltDependencies:
   - esbuild
   - simple-git-hooks

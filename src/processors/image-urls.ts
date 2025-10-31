@@ -10,7 +10,7 @@ export class ImageUrlsProcessor implements Processor {
 
   constructor(private options: ImageUrlsProcessorOptions = {}) {}
 
-  async process(content: string, ctx: ProcessContext): Promise<string> {
+  async process(content: string, _ctx: ProcessContext): Promise<string> {
     if (!this.options.imageMap || this.options.imageMap.size === 0) {
       return content
     }

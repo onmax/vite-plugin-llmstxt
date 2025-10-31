@@ -21,7 +21,7 @@ export class DocsFormatter implements Formatter {
     return expandTemplate(template, variables)
   }
 
-  formatFull(files: PreparedFile[], opts: FormatOptions): string {
+  formatFull(files: PreparedFile[], _opts: FormatOptions): string {
     const parts: string[] = []
 
     files.forEach((file, idx) => {

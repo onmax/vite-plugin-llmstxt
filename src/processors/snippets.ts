@@ -1,5 +1,5 @@
 import type { ProcessContext, Processor } from '../core/processor'
-import { readFile } from 'fs/promises'
+import { readFile } from 'node:fs/promises'
 import { join } from 'pathe'
 
 export interface SnippetsProcessorOptions {
@@ -13,7 +13,7 @@ export class SnippetsProcessor implements Processor {
 
   async process(content: string, ctx: ProcessContext): Promise<string> {
     const baseDir = this.options.baseDir || ctx.contentDir
-    const snippetRegex = /<!--@include:\s*(.+?)-->/g
+    const snippetRegex = /<!--@include:(.+?)-->/g
     let result = content
     const matches = content.matchAll(snippetRegex)
 
@@ -24,7 +24,7 @@ export class SnippetsProcessor implements Processor {
         const snippetContent = await readFile(fullPath, 'utf-8')
         result = result.replace(match[0], snippetContent)
       }
-      catch (err) {
+      catch {
         // Keep original if file not found
         console.warn(`Failed to include snippet: ${snippetPath}`)
       }

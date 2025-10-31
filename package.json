@@ -43,11 +43,11 @@
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
-    "consola": "^3.4.2",
-    "gray-matter": "^4.0.3",
-    "mdream": "^0.13.3",
-    "minimatch": "^10.1.1",
-    "pathe": "^1.1.2"
+    "consola": "catalog:",
+    "gray-matter": "catalog:",
+    "mdream": "catalog:",
+    "minimatch": "catalog:",
+    "pathe": "catalog:"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:dev",

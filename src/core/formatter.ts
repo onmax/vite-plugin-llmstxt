@@ -16,7 +16,7 @@ export interface FormatOptions {
 }
 
 export interface Formatter {
-  formatIndex(files: PreparedFile[], opts: FormatOptions): string
-  formatFull(files: PreparedFile[], opts: FormatOptions): string
-  formatIndividual(file: PreparedFile, opts: FormatOptions): string
+  formatIndex: (files: PreparedFile[], opts: FormatOptions) => string
+  formatFull: (files: PreparedFile[], opts: FormatOptions) => string
+  formatIndividual: (file: PreparedFile, opts: FormatOptions) => string
 }

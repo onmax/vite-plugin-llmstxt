@@ -1,11 +1,11 @@
 import type { Plugin, ViteDevServer } from 'vite'
+import type { PreparedFile } from './core/formatter'
 import type { LLMPluginOptions, Preset, ProcessorConfig } from './types'
-import { existsSync } from 'fs'
-import { mkdir, writeFile } from 'fs/promises'
+import { existsSync } from 'node:fs'
+import { mkdir, writeFile } from 'node:fs/promises'
 import { consola } from 'consola'
 import { join } from 'pathe'
 import { getDirectoriesAtDepths } from './core/depth'
-import type { PreparedFile } from './core/formatter'
 import { shouldIgnoreFile } from './core/filter'
 import { ProcessorPipeline } from './core/processor'
 import { createTutorialKitPreset } from './presets/tutorialkit'
@@ -47,7 +47,7 @@ function resolvePreset(preset: LLMPluginOptions['preset'], contentDir: string): 
   return preset
 }
 
-function mergeProcessors(preset: Preset, userProcessors?: LLMPluginOptions['processors']) {
+function mergeProcessors(preset: Preset, userProcessors?: LLMPluginOptions['processors']): Processor[] {
   if (!userProcessors) {
     return preset.processors
   }
@@ -96,7 +96,7 @@ export function llmsPlugin(options: LLMPluginOptions = {}): Plugin {
 
   let server: ViteDevServer | undefined
 
-  async function generate() {
+  async function generate(): Promise<void> {
     consola.start('Generating llms.txt files...')
 
     try {

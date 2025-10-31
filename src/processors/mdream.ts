@@ -13,7 +13,7 @@ export class MdreamProcessor implements Processor {
 
   constructor(private options: MdreamProcessorOptions = {}) {}
 
-  async process(content: string, ctx: ProcessContext): Promise<string> {
+  async process(content: string, _ctx: ProcessContext): Promise<string> {
     if (!this.options.stripHTML) {
       return content
     }

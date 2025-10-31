@@ -3,8 +3,6 @@ import { DEFAULT_TEMPLATE, expandTemplate } from '../core/template'
 
 export class TutorialFormatter implements Formatter {
   formatIndex(files: PreparedFile[], opts: FormatOptions): string {
-    const parts: string[] = []
-
     const title = opts.templateVars?.title || 'Tutorials'
     const description = opts.templateVars?.description || 'Learn through interactive tutorials.'
 
@@ -35,18 +33,12 @@ export class TutorialFormatter implements Formatter {
     return result
   }
 
-  formatFull(files: PreparedFile[], opts: FormatOptions): string {
-    const parts: string[] = []
-
-    files.forEach((file, idx) => {
-      parts.push(file.content)
-
-      if (idx < files.length - 1) {
-        parts.push('\n========================================\n')
-      }
-    })
-
-    return parts.join('\n')
+  formatFull(files: PreparedFile[], _opts: FormatOptions): string {
+    return files.map((file, idx) =>
+      idx < files.length - 1
+        ? `${file.content}\n========================================\n`
+        : file.content,
+    ).join('\n')
   }
 
   formatIndividual(file: PreparedFile, opts: FormatOptions): string {

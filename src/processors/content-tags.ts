@@ -10,7 +10,7 @@ export class ContentTagsProcessor implements Processor {
 
   constructor(private options: ContentTagsProcessorOptions = { handleLLMOnly: true, handleLLMExclude: true }) {}
 
-  async process(content: string, ctx: ProcessContext): Promise<string> {
+  async process(content: string, _ctx: ProcessContext): Promise<string> {
     let result = content
 
     if (this.options.handleLLMOnly) {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { llmsPlugin } from '../src/plugin'
 import { DocsFormatter } from '../src/formatters/docs'
+import { llmsPlugin } from '../src/plugin'
 import { MdreamProcessor } from '../src/processors/mdream'
 import { VitePressScanner } from '../src/scanners/vitepress'
 

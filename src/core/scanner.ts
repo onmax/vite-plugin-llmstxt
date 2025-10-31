@@ -5,6 +5,6 @@ export interface RawFile {
 }
 
 export interface Scanner {
-  scan(contentDir: string): Promise<RawFile[]>
-  watchPatterns(): string[]
+  scan: (contentDir: string) => Promise<RawFile[]>
+  watchPatterns: () => string[]
 }

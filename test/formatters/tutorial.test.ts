@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest'
 import type { PreparedFile } from '../../src/core/formatter'
+import { describe, expect, it } from 'vitest'
 import { TutorialFormatter } from '../../src/formatters/tutorial'
 
 describe('tutorialFormatter', () => {
