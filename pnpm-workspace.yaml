@@ -21,6 +21,11 @@ catalogs:
     vite: ^7.1.7
   inlined:
     '@antfu/utils': ^9.2.1
+  playground:
+    '@astrojs/vue': ^4.0.0
+    '@tutorialkit/astro': ^0.1.0
+    astro: ^4.0.0
+    vue: ^3.4.0
   testing:
     tinyexec: ^1.0.1
     vitest: ^3.2.4
