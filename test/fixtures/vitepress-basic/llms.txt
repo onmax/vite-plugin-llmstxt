@@ -1,0 +1,15 @@
+# Documentation
+
+> Complete documentation
+
+## Table of Contents
+
+### api
+
+- [api/reference](https://example.com/api/reference.md)
+
+### guide
+
+- [guide/getting-started](https://example.com/guide/getting-started.md)
+- [guide/introduction](https://example.com/guide/introduction.md)
+- [VitePress Playground](https://example.com/index.md): Testing vite-plugin-llmstxt with VitePress

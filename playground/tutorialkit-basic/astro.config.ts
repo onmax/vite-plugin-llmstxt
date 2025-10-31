@@ -5,7 +5,7 @@ import { llmsPlugin } from 'vite-plugin-llmstxt'
 
 export default defineConfig({
   vite: {
-    plugins: [llmsPlugin()],
+    plugins: [llmsPlugin({ preset: 'tutorialkit' })],
   },
   integrations: [tutorialkit(), vue()],
 })

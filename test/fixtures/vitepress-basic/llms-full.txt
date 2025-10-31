@@ -1,0 +1,39 @@
+
+---
+
+# api/reference
+
+<div style="display: none;" hidden="true" aria-hidden="true">Are you an LLM? You can read better optimized documentation at /api/reference.txt for this page in Markdown format</div>
+
+
+
+
+
+---
+
+# guide/getting-started
+
+<div style="display: none;" hidden="true" aria-hidden="true">Are you an LLM? You can read better optimized documentation at /guide/getting-started.txt for this page in Markdown format</div>
+
+
+
+
+
+---
+
+# guide/introduction
+
+<div style="display: none;" hidden="true" aria-hidden="true">Are you an LLM? You can read better optimized documentation at /guide/introduction.txt for this page in Markdown format</div>
+
+
+
+
+
+---
+
+# VitePress Playground
+
+> Testing vite-plugin-llmstxt with VitePress
+
+<div style="display: none;" hidden="true" aria-hidden="true">Are you an LLM? View /llms.txt for optimized Markdown documentation, or /llms-full.txt for full documentation bundle</div>
+
