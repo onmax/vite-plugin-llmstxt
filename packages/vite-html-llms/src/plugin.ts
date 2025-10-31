@@ -1,5 +1,6 @@
+import type { PreparedFile } from '@vite-plugin-llmstxt/core'
 import type { Plugin, ResolvedConfig } from 'vite'
-import type { MdreamWrapperOptions, PreparedFile } from './types'
+import type { MdreamWrapperOptions } from './types'
 import { readdir, readFile, writeFile } from 'node:fs/promises'
 import mdream from '@mdream/vite'
 import { ContentTagsProcessor, FrontmatterProcessor, MdreamProcessor, ProcessorPipeline } from '@vite-plugin-llmstxt/core'
@@ -54,9 +55,10 @@ export function htmlLlms(options: MdreamWrapperOptions = {}): Plugin[] {
         const content = await readFile(file.fullPath, 'utf-8')
         const processed = await pipeline.process(content, {
           filePath: file.fullPath,
+          contentDir: join(config.root, outputDir),
           relativePath: file.relativePath,
         })
-        prepared.push({ path: file.relativePath, content: processed })
+        prepared.push({ path: file.relativePath, title: file.relativePath, content: processed })
       }
 
       const indexContent = formatter.formatIndex(prepared, { title, description })

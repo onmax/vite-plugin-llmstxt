@@ -35,7 +35,12 @@
   "dependencies": {
     "@vite-plugin-llmstxt/core": "workspace:*",
     "@vite-plugin-llmstxt/tutorialkit": "workspace:*",
-    "@vite-plugin-llmstxt/vitepress": "workspace:*"
+    "@vite-plugin-llmstxt/vitepress": "workspace:*",
+    "consola": "catalog:",
+    "gray-matter": "catalog:",
+    "mdream": "catalog:",
+    "minimatch": "catalog:",
+    "pathe": "catalog:"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:dev",

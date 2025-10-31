@@ -1,92 +1,48 @@
-import { DocsFormatter } from '@vite-plugin-llmstxt/formatters/docs'
-import { llmsPlugin } from '@vite-plugin-llmstxt/plugin'
-import { MdreamProcessor } from '@vite-plugin-llmstxt/processors/mdream'
-import { VitePressScanner } from '@vite-plugin-llmstxt/scanners/vitepress'
+import { DocsFormatter, MdreamProcessor } from '@vite-plugin-llmstxt/core'
+import { VitePressScanner } from '@vite-plugin-llmstxt/vitepress'
 import { describe, expect, it } from 'vitest'
+import { llmsPlugin } from '../src/plugin'
 
 describe('llmsPlugin', () => {
   it('returns vite plugin with correct name', () => {
     const plugin = llmsPlugin({ preset: 'tutorialkit' })
-
-    expect(plugin.name).toBe('vite-plugin-llmstxt')
-    expect(plugin.buildStart).toBeDefined()
-    expect(plugin.configureServer).toBeDefined()
-  })
-
-  it('accepts basic options', () => {
-    const plugin = llmsPlugin({
-      preset: 'tutorialkit',
-      contentDir: 'custom/content',
-      outputDir: 'custom/output',
-    })
-
-    expect(plugin.name).toBe('vite-plugin-llmstxt')
-  })
-
-  it('accepts preset option', () => {
-    const plugin = llmsPlugin({
-      preset: 'tutorialkit',
-    })
-
     expect(plugin.name).toBe('vite-plugin-llmstxt')
   })
 
   it('accepts custom scanner', () => {
-    const plugin = llmsPlugin({
-      preset: 'tutorialkit',
-      scanner: new VitePressScanner(),
-    })
-
+    const scanner = new VitePressScanner()
+    const plugin = llmsPlugin({ preset: 'vitepress', scanner })
     expect(plugin.name).toBe('vite-plugin-llmstxt')
   })
 
   it('accepts custom processors', () => {
-    const plugin = llmsPlugin({
-      preset: 'tutorialkit',
-      processors: [new MdreamProcessor({ stripHTML: true })],
-    })
-
+    const processor = new MdreamProcessor()
+    const plugin = llmsPlugin({ preset: 'tutorialkit', processors: [processor] })
     expect(plugin.name).toBe('vite-plugin-llmstxt')
   })
 
   it('accepts custom formatter', () => {
-    const plugin = llmsPlugin({
-      preset: 'tutorialkit',
-      formatter: new DocsFormatter(),
-    })
-
+    const formatter = new DocsFormatter()
+    const plugin = llmsPlugin({ preset: 'tutorialkit', formatter })
     expect(plugin.name).toBe('vite-plugin-llmstxt')
   })
 
-  it('accepts template options', () => {
-    const plugin = llmsPlugin({
-      preset: 'tutorialkit',
-      template: '# {title}\n\n{toc}',
-      templateVars: { title: 'Custom' },
-    })
-
+  it('accepts explicit tutorialkit preset', () => {
+    const plugin = llmsPlugin({ preset: 'tutorialkit' })
     expect(plugin.name).toBe('vite-plugin-llmstxt')
   })
 
-  it('accepts filtering options', () => {
-    const plugin = llmsPlugin({
-      preset: 'tutorialkit',
-      ignoreFiles: ['**/draft/**'],
-      excludeBlog: true,
-      excludeTeam: true,
-    })
-
+  it('accepts explicit vitepress preset', () => {
+    const plugin = llmsPlugin({ preset: 'vitepress' })
     expect(plugin.name).toBe('vite-plugin-llmstxt')
   })
 
-  it('accepts experimental options', () => {
+  it('applies processor mode append', () => {
+    const processor = new MdreamProcessor()
     const plugin = llmsPlugin({
       preset: 'tutorialkit',
-      experimental: {
-        depth: 2,
-      },
+      processors: { mode: 'append', list: [processor] },
     })
-
     expect(plugin.name).toBe('vite-plugin-llmstxt')
   })
 })

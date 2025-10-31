@@ -1,6 +1,4 @@
 import type { Preset, Tutorial } from './types'
-import { mkdir, writeFile } from 'node:fs/promises'
-import { join } from 'pathe'
 
 export class LLMGenerator {
   constructor(private preset?: Preset) {}
@@ -70,29 +68,30 @@ export class LLMGenerator {
     return parts.join('\n')
   }
 
-  async generateAll(contentDir: string, outputDir: string): Promise<void> {
-    if (!this.preset) {
-      throw new Error('Preset is required for generateAll')
-    }
+  // Note: This method is deprecated and not used
+  // async generateAll(contentDir: string, outputDir: string): Promise<void> {
+  //   if (!this.preset) {
+  //     throw new Error('Preset is required for generateAll')
+  //   }
 
-    const tutorials = await this.preset.scanTutorials(contentDir)
+  //   const tutorials = await this.preset.scanTutorials(contentDir)
 
-    // Create output directories
-    await mkdir(join(outputDir, 'tutorial'), { recursive: true })
+  //   // Create output directories
+  //   await mkdir(join(outputDir, 'tutorial'), { recursive: true })
 
-    // Generate individual tutorial files
-    for (const tutorial of tutorials) {
-      const content = this.generateTutorialFile(tutorial)
-      const filePath = join(outputDir, 'tutorial', `${tutorial.slug}.txt`)
-      await writeFile(filePath, content, 'utf-8')
-    }
+  //   // Generate individual tutorial files
+  //   for (const tutorial of tutorials) {
+  //     const content = this.generateTutorialFile(tutorial)
+  //     const filePath = join(outputDir, 'tutorial', `${tutorial.slug}.txt`)
+  //     await writeFile(filePath, content, 'utf-8')
+  //   }
 
-    // Generate root index
-    const rootIndex = this.generateRootIndex(tutorials)
-    await writeFile(join(outputDir, 'llms.txt'), rootIndex, 'utf-8')
+  //   // Generate root index
+  //   const rootIndex = this.generateRootIndex(tutorials)
+  //   await writeFile(join(outputDir, 'llms.txt'), rootIndex, 'utf-8')
 
-    // Generate full file
-    const fullFile = this.generateFullFile(tutorials)
-    await writeFile(join(outputDir, 'llms-full.txt'), fullFile, 'utf-8')
-  }
+  //   // Generate full file
+  //   const fullFile = this.generateFullFile(tutorials)
+  //   await writeFile(join(outputDir, 'llms-full.txt'), fullFile, 'utf-8')
+  // }
 }

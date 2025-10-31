@@ -1,11 +1,7 @@
 import { mkdtemp, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { ProcessorPipeline } from '@vite-plugin-llmstxt/core/processor'
-import { DocsFormatter } from '@vite-plugin-llmstxt/formatters/docs'
-import { ContentTagsProcessor } from '@vite-plugin-llmstxt/processors/content-tags'
-import { FrontmatterProcessor } from '@vite-plugin-llmstxt/processors/frontmatter'
-import { SnippetsProcessor } from '@vite-plugin-llmstxt/processors/snippets'
-import { VitePressScanner } from '@vite-plugin-llmstxt/scanners/vitepress'
+import { ContentTagsProcessor, DocsFormatter, FrontmatterProcessor, ProcessorPipeline, SnippetsProcessor } from '@vite-plugin-llmstxt/core'
+import { VitePressScanner } from '@vite-plugin-llmstxt/vitepress'
 import { join, resolve } from 'pathe'
 import { afterEach, describe, expect, it } from 'vitest'
 

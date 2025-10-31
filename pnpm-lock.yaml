@@ -93,6 +93,21 @@ importers:
       '@vite-plugin-llmstxt/vitepress':
         specifier: workspace:*
         version: link:packages/vitepress
+      consola:
+        specifier: 'catalog:'
+        version: 3.4.2
+      gray-matter:
+        specifier: 'catalog:'
+        version: 4.0.3
+      mdream:
+        specifier: 'catalog:'
+        version: 0.13.3
+      minimatch:
+        specifier: 'catalog:'
+        version: 10.1.1
+      pathe:
+        specifier: 'catalog:'
+        version: 1.1.2
     devDependencies:
       '@antfu/eslint-config':
         specifier: catalog:dev

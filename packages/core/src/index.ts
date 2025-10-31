@@ -4,7 +4,7 @@ export type { DirectoryLevel } from './depth'
 export { shouldIgnoreFile } from './filter'
 export type { FileFilter } from './filter'
 
-export type { Formatter, PreparedFile } from './formatter'
+export type { FormatOptions, Formatter, PreparedFile } from './formatter'
 // Formatters
 export { DocsFormatter } from './formatters/docs'
 export { TutorialFormatter } from './formatters/tutorial'

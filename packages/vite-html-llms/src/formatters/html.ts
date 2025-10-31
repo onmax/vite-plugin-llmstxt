@@ -1,9 +1,15 @@
-import type { FormatOptions, Formatter, PreparedFile } from '../types'
+import type { FormatOptions, Formatter, PreparedFile } from '@vite-plugin-llmstxt/core'
+
+interface HtmlFormatOptions extends FormatOptions {
+  title?: string
+  description?: string
+}
 
 export class HtmlFormatter implements Formatter {
   formatIndex(files: PreparedFile[], opts: FormatOptions): string {
-    const title = opts.title || 'Available Pages'
-    const description = opts.description || 'LLM-optimized content index'
+    const htmlOpts = opts as HtmlFormatOptions
+    const title = htmlOpts.title || 'Available Pages'
+    const description = htmlOpts.description || 'LLM-optimized content index'
 
     const sections = [
       `# ${title}`,
@@ -19,8 +25,9 @@ export class HtmlFormatter implements Formatter {
   }
 
   formatFull(files: PreparedFile[], opts: FormatOptions): string {
-    const title = opts.title || 'Full Content'
-    const description = opts.description || 'Complete LLM-optimized content'
+    const htmlOpts = opts as HtmlFormatOptions
+    const title = htmlOpts.title || 'Full Content'
+    const description = htmlOpts.description || 'Complete LLM-optimized content'
 
     const sections = [
       `# ${title}`,
@@ -42,5 +49,9 @@ export class HtmlFormatter implements Formatter {
     }
 
     return sections.join('\n')
+  }
+
+  formatIndividual(file: PreparedFile, _opts: FormatOptions): string {
+    return `# ${file.title}\n\n${file.content}`
   }
 }

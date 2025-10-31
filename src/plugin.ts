@@ -1,4 +1,4 @@
-import type { PreparedFile } from '@vite-plugin-llmstxt/core'
+import type { PreparedFile, Processor } from '@vite-plugin-llmstxt/core'
 import type { Plugin, ViteDevServer } from 'vite'
 import type { LLMPluginOptions, Preset, ProcessorConfig } from './types'
 import { existsSync } from 'node:fs'
@@ -156,18 +156,20 @@ export function llmsPlugin(options: LLMPluginOptions = {}): Plugin {
       await mkdir(mergedOptions.outputDir, { recursive: true })
 
       // Format and write outputs
+      const templateVars: Record<string, string> = {
+        ...(mergedOptions.title && { title: mergedOptions.title }),
+        ...(mergedOptions.description && { description: mergedOptions.description }),
+        ...(mergedOptions.details && { details: mergedOptions.details }),
+        ...(template && { template }),
+        ...mergedOptions.templateVars,
+      }
+
       const formatOpts = {
         domain: mergedOptions.domain,
         base: '/',
         linksExtension: mergedOptions.generateIndividual ? undefined : '.html',
         directoryFilter: '.',
-        templateVars: {
-          title: mergedOptions.title,
-          description: mergedOptions.description,
-          details: mergedOptions.details,
-          template,
-          ...mergedOptions.templateVars,
-        },
+        templateVars,
       }
 
       const tasks: Promise<void>[] = []

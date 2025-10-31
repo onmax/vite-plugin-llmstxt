@@ -39,7 +39,8 @@ describe('htmlLlms plugin', () => {
 
   it('accepts custom processors', () => {
     const customProcessor = {
-      process: (content: string) => content.toUpperCase(),
+      name: 'custom-processor',
+      process: async (content: string) => content.toUpperCase(),
     }
 
     const plugins = htmlLlms({
