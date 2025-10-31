@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-llmstxt",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "packageManager": "pnpm@10.20.0",
   "description": "Vite plugin to generate llms.txt files from tutorial content",
   "author": "Your Name",
@@ -35,7 +35,7 @@
     "dev": "tsdown --watch",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "prepublishOnly": "nr build",
+    "prepublishOnly": "tsdown",
     "release": "bumpp",
     "start": "tsx src/index.ts",
     "test": "vitest",
@@ -43,8 +43,8 @@
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
-    "consola": "catalog:default",
-    "pathe": "catalog:default"
+    "consola": "^3.4.2",
+    "pathe": "^1.1.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:dev",
