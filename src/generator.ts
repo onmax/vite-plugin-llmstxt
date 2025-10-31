@@ -1,10 +1,9 @@
-// src/generator.ts
+import type { Preset, Tutorial } from './types'
 import { mkdir, writeFile } from 'node:fs/promises'
-import { join } from 'node:path'
-import type { Adapter, Tutorial } from './types'
+import { join } from 'pathe'
 
 export class LLMGenerator {
-  constructor(private adapter?: Adapter) {}
+  constructor(private preset?: Preset) {}
 
   generateTutorialFile(tutorial: Tutorial): string {
     const parts: string[] = []
@@ -72,11 +71,11 @@ export class LLMGenerator {
   }
 
   async generateAll(contentDir: string, outputDir: string): Promise<void> {
-    if (!this.adapter) {
-      throw new Error('Adapter is required for generateAll')
+    if (!this.preset) {
+      throw new Error('Preset is required for generateAll')
     }
 
-    const tutorials = await this.adapter.scanTutorials(contentDir)
+    const tutorials = await this.preset.scanTutorials(contentDir)
 
     // Create output directories
     await mkdir(join(outputDir, 'tutorial'), { recursive: true })

@@ -40,8 +40,8 @@ test/
 ```ts
 // adapters/base.ts
 export interface Tutorial {
-  slug: string              // "introduction"
-  title: string             // "Introduction"
+  slug: string // "introduction"
+  title: string // "Introduction"
   description?: string
   lessons: Lesson[]
 }
@@ -49,13 +49,13 @@ export interface Tutorial {
 export interface Lesson {
   slug: string
   title: string
-  content: string           // Markdown content
-  solutionFiles: Map<string, string>  // filename -> code
+  content: string // Markdown content
+  solutionFiles: Map<string, string> // filename -> code
 }
 
 export interface Adapter {
-  scanTutorials(contentDir: string): Promise<Tutorial[]>
-  watchPatterns(): string[]  // Glob patterns for dev mode watching
+  scanTutorials: (contentDir: string) => Promise<Tutorial[]>
+  watchPatterns: () => string[] // Glob patterns for dev mode watching
 }
 ```
 
@@ -184,9 +184,9 @@ export function llmsPlugin(options?: LLMPluginOptions): Plugin {
 
 ```ts
 interface LLMPluginOptions {
-  adapter?: Adapter          // Default: TutorialKitAdapter
-  contentDir?: string        // Default: 'src/content/tutorial'
-  outputDir?: string         // Default: 'public'
+  adapter?: Adapter // Default: TutorialKitAdapter
+  contentDir?: string // Default: 'src/content/tutorial'
+  outputDir?: string // Default: 'public'
 }
 ```
 
@@ -198,7 +198,7 @@ import { llmsPlugin } from 'vite-plugin-llmstxt'
 
 export default defineConfig({
   vite: {
-    plugins: [llmsPlugin()]  // Uses TutorialKit adapter by default
+    plugins: [llmsPlugin()] // Uses TutorialKit adapter by default
   }
 })
 ```
@@ -297,10 +297,10 @@ playground/
 ### Main Exports
 
 ```ts
+export { TutorialKitAdapter } from './adapters/tutorialkit'
 // src/index.ts
 export { llmsPlugin } from './plugin'
-export { TutorialKitAdapter } from './adapters/tutorialkit'
-export type { Adapter, Tutorial, Lesson, LLMPluginOptions } from './types'
+export type { Adapter, Lesson, LLMPluginOptions, Tutorial } from './types'
 ```
 
 ### Build Tooling

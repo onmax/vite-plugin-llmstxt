@@ -8,10 +8,10 @@
     "build": "astro build"
   },
   "dependencies": {
-    "@astrojs/vue": "catalog:playground",
-    "@tutorialkit/astro": "catalog:playground",
-    "astro": "catalog:playground",
+    "@astrojs/vue": "^4.0.0",
+    "@tutorialkit/astro": "^0.1.0",
+    "astro": "^4.0.0",
     "vite-plugin-llmstxt": "workspace:*",
-    "vue": "catalog:playground"
+    "vue": "^3.4.0"
   }
 }

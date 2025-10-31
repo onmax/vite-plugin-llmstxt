@@ -1,9 +1,9 @@
+import type { Tutorial } from '../src/types'
 // test/generator.test.ts
 import { describe, expect, it } from 'vitest'
 import { LLMGenerator } from '../src/generator'
-import type { Tutorial } from '../src/types'
 
-describe('LLMGenerator', () => {
+describe('lLMGenerator', () => {
   it('generates tutorial file with lessons and solution code', () => {
     const tutorial: Tutorial = {
       slug: 'intro',

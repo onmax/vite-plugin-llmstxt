@@ -1,12 +1,11 @@
-// test/generator-integration.test.ts
 import { mkdtemp, readFile, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
-import { describe, expect, it, afterEach } from 'vitest'
+import { join } from 'pathe'
+import { afterEach, describe, expect, it } from 'vitest'
 import { LLMGenerator } from '../src/generator'
-import { TutorialKitAdapter } from '../src/adapters/tutorialkit'
+import { TutorialKitPreset } from '../src/presets/tutorialkit'
 
-describe('LLMGenerator file operations', () => {
+describe('lLMGenerator file operations', () => {
   let tempDir: string
 
   afterEach(async () => {
@@ -19,8 +18,8 @@ describe('LLMGenerator file operations', () => {
     const fixturesDir = join(__dirname, 'fixtures/mock-tutorial')
     tempDir = await mkdtemp(join(tmpdir(), 'llms-test-'))
 
-    const adapter = new TutorialKitAdapter()
-    const generator = new LLMGenerator(adapter)
+    const preset = new TutorialKitPreset()
+    const generator = new LLMGenerator(preset)
 
     await generator.generateAll(fixturesDir, tempDir)
 

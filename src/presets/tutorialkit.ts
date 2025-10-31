@@ -1,8 +1,8 @@
+import type { Lesson, Preset, Tutorial } from '../types'
 import { readdir, readFile } from 'node:fs/promises'
-import { join, basename } from 'node:path'
-import type { Adapter, Lesson, Tutorial } from '../types'
+import { join } from 'pathe'
 
-export class TutorialKitAdapter implements Adapter {
+export class TutorialKitPreset implements Preset {
   async scanTutorials(contentDir: string): Promise<Tutorial[]> {
     const entries = await readdir(contentDir, { withFileTypes: true })
     const tutorialDirs = entries
@@ -37,8 +37,8 @@ export class TutorialKitAdapter implements Adapter {
 
       if (frontmatterMatch) {
         const yaml = frontmatterMatch[1]
-        const titleMatch = yaml.match(/^title:\s*(.+)$/m)
-        const descMatch = yaml.match(/^description:\s*(.+)$/m)
+        const titleMatch = yaml.match(/^title:(.+)$/m)
+        const descMatch = yaml.match(/^description:(.+)$/m)
 
         return {
           title: titleMatch?.[1]?.trim(),
@@ -67,8 +67,8 @@ export class TutorialKitAdapter implements Adapter {
       const solutionFiles = await this.readSolutionFiles(lessonPath)
 
       // Extract title from content.md first heading
-      const titleMatch = content.match(/^#\s+(.+)$/m)
-      const title = titleMatch?.[1] || slug
+      const titleMatch = content.match(/^# (.+)$/m)
+      const title = titleMatch?.[1]?.trim() || slug
 
       lessons.push({
         slug,

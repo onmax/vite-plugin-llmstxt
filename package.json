@@ -13,9 +13,9 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./adapters/tutorialkit": {
-      "types": "./dist/adapters/tutorialkit.d.ts",
-      "import": "./dist/adapters/tutorialkit.js"
+    "./presets/tutorialkit": {
+      "types": "./dist/presets/tutorialkit.d.ts",
+      "import": "./dist/presets/tutorialkit.js"
     }
   },
   "main": "./dist/index.js",
@@ -28,6 +28,7 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "prepublishOnly": "nr build",
     "release": "bumpp",
     "start": "tsx src/index.ts",
@@ -35,23 +36,27 @@
     "typecheck": "tsc --noEmit",
     "prepare": "simple-git-hooks"
   },
+  "dependencies": {
+    "consola": "catalog:default",
+    "pathe": "catalog:default"
+  },
   "devDependencies": {
-    "@antfu/eslint-config": "catalog:cli",
-    "@antfu/ni": "catalog:cli",
-    "@antfu/utils": "catalog:inlined",
-    "@types/node": "catalog:types",
-    "bumpp": "catalog:cli",
-    "eslint": "catalog:cli",
-    "lint-staged": "catalog:cli",
-    "simple-git-hooks": "catalog:cli",
-    "tinyexec": "catalog:testing",
-    "tsdown": "catalog:cli",
-    "tsx": "catalog:cli",
-    "typescript": "catalog:cli",
-    "vite": "catalog:cli",
-    "vitest": "catalog:testing",
-    "vitest-package-exports": "catalog:testing",
-    "yaml": "catalog:testing"
+    "@antfu/eslint-config": "catalog:dev",
+    "@antfu/ni": "catalog:dev",
+    "@antfu/utils": "catalog:dev",
+    "@types/node": "catalog:dev",
+    "bumpp": "catalog:dev",
+    "eslint": "catalog:dev",
+    "lint-staged": "catalog:dev",
+    "simple-git-hooks": "catalog:dev",
+    "tinyexec": "catalog:dev",
+    "tsdown": "catalog:dev",
+    "tsx": "catalog:dev",
+    "typescript": "catalog:dev",
+    "vite": "catalog:dev",
+    "vitest": "catalog:dev",
+    "vitest-package-exports": "catalog:dev",
+    "yaml": "catalog:dev"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm i --frozen-lockfile --ignore-scripts --offline && npx lint-staged"

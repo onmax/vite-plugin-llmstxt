@@ -1,13 +1,13 @@
-import { resolve } from 'node:path'
+import { resolve } from 'pathe'
 import { describe, expect, it } from 'vitest'
-import { TutorialKitAdapter } from '../../src/adapters/tutorialkit'
+import { TutorialKitPreset } from '../../src/presets/tutorialkit'
 
-describe('TutorialKitAdapter', () => {
+describe('tutorialKitPreset', () => {
   it('scans tutorials from fixtures', async () => {
-    const adapter = new TutorialKitAdapter()
+    const preset = new TutorialKitPreset()
     const fixturesDir = resolve(__dirname, '../fixtures/mock-tutorial')
 
-    const tutorials = await adapter.scanTutorials(fixturesDir)
+    const tutorials = await preset.scanTutorials(fixturesDir)
 
     expect(tutorials).toHaveLength(1)
     expect(tutorials[0].slug).toBe('intro')
@@ -19,8 +19,8 @@ describe('TutorialKitAdapter', () => {
   })
 
   it('returns watch patterns', () => {
-    const adapter = new TutorialKitAdapter()
-    const patterns = adapter.watchPatterns()
+    const preset = new TutorialKitPreset()
+    const patterns = preset.watchPatterns()
 
     expect(patterns).toContain('**/meta.md')
     expect(patterns).toContain('**/content.md')

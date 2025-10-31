@@ -117,8 +117,8 @@ export interface Tutorial {
 }
 
 export interface Adapter {
-  scanTutorials(contentDir: string): Promise<Tutorial[]>
-  watchPatterns(): string[]
+  scanTutorials: (contentDir: string) => Promise<Tutorial[]>
+  watchPatterns: () => string[]
 }
 
 export interface LLMPluginOptions {
@@ -156,7 +156,7 @@ git commit -m "feat: add type definitions"
 
 ```typescript
 // src/adapters/base.ts
-export type { Adapter, Tutorial, Lesson } from '../types'
+export type { Adapter, Lesson, Tutorial } from '../types'
 ```
 
 **Step 2: Verify types compile**
@@ -185,10 +185,10 @@ git commit -m "feat: add base adapter interface"
 **Step 1: Write failing test**
 
 ```typescript
+import type { Tutorial } from '../src/types'
 // test/generator.test.ts
 import { describe, expect, it } from 'vitest'
 import { LLMGenerator } from '../src/generator'
-import type { Tutorial } from '../src/types'
 
 describe('LLMGenerator', () => {
   it('generates tutorial file with lessons and solution code', () => {
@@ -562,10 +562,10 @@ Expected: FAIL - TutorialKitAdapter not found
 **Step 3: Write minimal implementation**
 
 ```typescript
+import type { Adapter, Lesson, Tutorial } from '../types'
 // src/adapters/tutorialkit.ts
 import { readdir, readFile } from 'node:fs/promises'
-import { join, basename } from 'node:path'
-import type { Adapter, Lesson, Tutorial } from '../types'
+import { basename, join } from 'node:path'
 
 export class TutorialKitAdapter implements Adapter {
   async scanTutorials(contentDir: string): Promise<Tutorial[]> {
@@ -712,9 +712,9 @@ git commit -m "feat: add tutorialkit adapter"
 import { mkdtemp, readFile, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { describe, expect, it, afterEach } from 'vitest'
-import { LLMGenerator } from '../src/generator'
+import { afterEach, describe, expect, it } from 'vitest'
 import { TutorialKitAdapter } from '../src/adapters/tutorialkit'
+import { LLMGenerator } from '../src/generator'
 
 describe('LLMGenerator file operations', () => {
   let tempDir: string
@@ -820,9 +820,9 @@ git commit -m "feat: add file system integration"
 ```typescript
 // src/plugin.ts
 import type { Plugin, ViteDevServer } from 'vite'
-import { LLMGenerator } from './generator'
-import { TutorialKitAdapter } from './adapters/tutorialkit'
 import type { LLMPluginOptions } from './types'
+import { TutorialKitAdapter } from './adapters/tutorialkit'
+import { LLMGenerator } from './generator'
 
 export function llmsPlugin(options: LLMPluginOptions = {}): Plugin {
   const {
@@ -917,11 +917,11 @@ git commit -m "feat: add vite plugin implementation"
 **Step 1: Create main exports file**
 
 ```typescript
-// src/index.ts
-export { llmsPlugin } from './plugin'
 export { TutorialKitAdapter } from './adapters/tutorialkit'
 export { LLMGenerator } from './generator'
-export type { Adapter, Tutorial, Lesson, LLMPluginOptions } from './types'
+// src/index.ts
+export { llmsPlugin } from './plugin'
+export type { Adapter, Lesson, LLMPluginOptions, Tutorial } from './types'
 ```
 
 **Step 2: Verify build works**

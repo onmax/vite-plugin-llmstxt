@@ -1,14 +1,15 @@
 # Playground
 
-Test environment for vite-plugin-llmstxt
+Test environments for the plugin.
+
+## Available Playgrounds
+
+- `tutorialkit-basic/` - Basic TutorialKit setup with llms.txt generation
 
 ## Usage
 
 ```bash
-pnpm -F playground dev
+cd <playground-name>
+npm install
+npm run dev
 ```
-
-Check generated files in `public/`:
-- `llms.txt`
-- `llms-full.txt`
-- `tutorial/test.txt`

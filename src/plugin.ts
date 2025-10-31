@@ -1,32 +1,55 @@
-// src/plugin.ts
 import type { Plugin, ViteDevServer } from 'vite'
+import type { LLMPluginOptions, Preset } from './types'
+import { existsSync } from 'node:fs'
+import { consola } from 'consola'
+import { join } from 'pathe'
 import { LLMGenerator } from './generator'
-import { TutorialKitAdapter } from './adapters/tutorialkit'
-import type { LLMPluginOptions } from './types'
+import { TutorialKitPreset } from './presets/tutorialkit'
+
+function resolvePreset(preset: LLMPluginOptions['preset'], contentDir: string): Preset {
+  if (!preset || preset === 'auto') {
+    // Auto-detect: check for TutorialKit structure
+    const tutorialKitMarkers = [
+      join(contentDir, 'meta.md'),
+      join(contentDir, '../env.d.ts'),
+    ]
+    if (tutorialKitMarkers.some(path => existsSync(path))) {
+      return new TutorialKitPreset()
+    }
+    throw new Error('Could not auto-detect preset. Please specify a preset explicitly.')
+  }
+
+  if (preset === 'tutorialkit') {
+    return new TutorialKitPreset()
+  }
+
+  return preset
+}
 
 export function llmsPlugin(options: LLMPluginOptions = {}): Plugin {
   const {
-    adapter = new TutorialKitAdapter(),
+    preset: presetOption = 'auto',
     contentDir = 'src/content/tutorial',
     outputDir = 'public',
   } = options
 
-  const generator = new LLMGenerator(adapter)
+  const preset = resolvePreset(presetOption, contentDir)
+  const generator = new LLMGenerator(preset)
   let server: ViteDevServer | undefined
 
   return {
     name: 'vite-plugin-llmstxt',
 
     async buildStart() {
-      console.log('[llms] Generating llms.txt files...')
+      consola.start('Generating llms.txt files...')
       await generator.generateAll(contentDir, outputDir)
-      console.log('[llms] Generation complete')
+      consola.success('Generation complete')
     },
 
     configureServer(devServer) {
       server = devServer
 
-      const patterns = adapter.watchPatterns()
+      const patterns = preset.watchPatterns()
 
       server.watcher.on('change', async (file) => {
         const shouldRegenerate = patterns.some((pattern) => {
@@ -35,7 +58,7 @@ export function llmsPlugin(options: LLMPluginOptions = {}): Plugin {
         })
 
         if (shouldRegenerate && file.includes(contentDir)) {
-          console.log('[llms] Content changed, regenerating...')
+          consola.info('Content changed, regenerating...')
           await generator.generateAll(contentDir, outputDir)
           server?.ws.send({ type: 'full-reload' })
         }

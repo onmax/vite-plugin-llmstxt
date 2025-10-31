@@ -1,4 +1,3 @@
-// src/types.ts
 import type { Plugin } from 'vite'
 
 export interface Lesson {
@@ -15,13 +14,13 @@ export interface Tutorial {
   lessons: Lesson[]
 }
 
-export interface Adapter {
-  scanTutorials(contentDir: string): Promise<Tutorial[]>
-  watchPatterns(): string[]
+export interface Preset {
+  scanTutorials: (contentDir: string) => Promise<Tutorial[]>
+  watchPatterns: () => string[]
 }
 
 export interface LLMPluginOptions {
-  adapter?: Adapter
+  preset?: Preset | 'tutorialkit' | 'auto'
   contentDir?: string
   outputDir?: string
 }
